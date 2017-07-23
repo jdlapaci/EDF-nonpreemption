@@ -52,13 +52,11 @@ loop:
 		select {
 		case t := <-w.TaskChan:
 			// This worker receives a new task to run
-			// To be implemented
 			w.Process(t)
-			w.FlagChan <- 0 	// this will alert the scheduler that this worker is ready to be put back into its FreeWorkerBuf
+			w.FlagChan <- 0 	
 			log.Printf("worker<%d> sends flag\n",w.WorkerID)
 		case <-w.StopChan:
 			// Receive signal to stop
-			// To be implemented
 			w.FlagChan <- 0
 			break loop
 		}
@@ -70,7 +68,6 @@ loop:
 func (w *Worker) Process(t *task.Task) {
 	log.Printf("Worker <%d>: App<%s>/Task<%d> starts (ddl %v)\n", w.WorkerID, t.AppID, t.TaskID, t.Deadline)
 	// Process the task
-	// To be implemented
-	time.Sleep(t.TotalRunTime) // This simulates the time it takes for a task to run to completion
+	time.Sleep(t.TotalRunTime) 
 	log.Printf("Worker <%d>: App<%s>/Task<%d> ends\n", w.WorkerID, t.AppID, t.TaskID)
 }
